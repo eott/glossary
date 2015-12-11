@@ -28,6 +28,12 @@ class Router
                 'controller' => 'Glossary\Controller\Index',
                 'action'     => 'index',
             ),
+            array(
+                'pattern'    => '/definition/:term',
+                'template'   => 'definition.phtml',
+                'controller' => 'Glossary\Controller\Definition',
+                'action'     => 'index',
+            ),
         );
     }
 }
