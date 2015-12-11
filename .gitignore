@@ -1,0 +1,30 @@
+# PhpStorm
+.idea/
+
+# Eclipse
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+*.launch
+
+# Zend Studio
+.zfproject.xml
+
+# Netbeans
+nbproject/
+
+# Sublime
+sftp-config.json
+*.sublime-project
+*.sublime-workspace
