@@ -13,6 +13,9 @@ class Router
      */
     public function getRoutes()
     {
-        return array('/' => 'index.phtml');
+        return array(
+            '/' => 'index.phtml',
+            '/definition/:def+' => 'definition.phtml',
+        );
     }
 }
