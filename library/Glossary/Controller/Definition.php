@@ -1,23 +1,18 @@
 <?php
 namespace Glossary\Controller;
 
-class Definition
+/**
+ * Handles request about definitions.
+ */
+class Definition extends \Glossary\Controller\AbstractController
 {
-    public function __construct($view)
-    {
-        $this->_view = $view;
-    }
-
-    public function action($name, $args)
-    {
-        if (is_callable(array($this, $name . 'Action'))) {
-            $this->{$name . 'Action'}($args);
-        } else {
-            throw new \Exception("Unknown action $name in controller " . __CLASS__);
-        }
-    }
-
-    public function indexAction()
+    /**
+     * Is called when a definition should be displayed. Further definitions
+     * will be loaded on demand, so we start with only the central one.
+     *
+     * @param array $args The route parameters
+     */
+    public function indexAction($args)
     {
 
     }
