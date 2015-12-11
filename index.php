@@ -5,6 +5,13 @@
 error_reporting(E_ALL | E_NOTICE);
 ini_set('display_errors', 1);
 
+// Useful globals
+defined('APPLICATION_PATH')
+    || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/'));
+
+defined('APPLICATION_ENV')
+    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
+
 // Register autoloaders
 require 'library/vendor/autoload.php';
 require 'library/Glossary/autoload.php';

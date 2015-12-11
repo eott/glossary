@@ -19,7 +19,7 @@ class Definition extends \Glossary\Controller\AbstractController
             isset($_POST['searchTerm'])
             && !empty($_POST['searchTerm'])
         ) {
-            $this->redirect('definition/' . $_POST['searchTerm']);
+            $this->redirect('definition/' . urlencode($_POST['searchTerm']));
         } else {
             $this->redirect('/');
         }
@@ -33,8 +33,42 @@ class Definition extends \Glossary\Controller\AbstractController
      */
     public function defineAction($args)
     {
-        $term = reset($args);
-        $this->_view->mainTerm = $term;
-        $this->_view->mainDescription = '';
+        $term = $this->cleanTerm(urldecode(reset($args)));
+        $filename = APPLICATION_PATH . '/data/' . $term . '.json';
+        if (file_exists($filename)) {
+            $data = json_decode(file_get_contents($filename));
+            $this->_view->mainTerm = $data->term;
+            $this->_view->mainDescription = $this->formatDescription($data->description);
+        } else {
+            $this->_view->errors = array('Suchbegriff nicht gefunden.');
+        }
+    }
+
+    /**
+     * Cleans the given seach term for its use in the filename based system.
+     *
+     * @param string $term The search term
+     * @return string The cleaned search term
+     */
+    public function cleanTerm($term)
+    {
+        $search  = array('\r', '\n', '\t', ' ');
+        $replace = array('', '', '', '-');
+        $str     = strtolower(str_replace($search, $replace, $term));
+        $str     = preg_replace('[^\w-]', '', $term);
+        return $str;
+    }
+
+    /**
+     * Formats the given description for its use in the output.
+     *
+     * @param string $desc The description
+     * @param string The formatted description
+     */
+    public function formatDescription($desc)
+    {
+        $search  = array('\r', '\n', '\t');
+        $replace = array('', '<br/>', '');
+        return str_replace($search, $replace, $desc);
     }
 }
