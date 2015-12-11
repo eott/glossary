@@ -36,4 +36,18 @@ abstract class AbstractController
             throw new \Exception("Unknown action $name in controller " . __CLASS__);
         }
     }
+
+    /**
+     * Redirects the request to the given URL. This may be a route relative to
+     * our base URL, e.g. 'foo/bar/123' or '/'
+     *
+     * @param string $url The URL to where the request is rerouted
+     */
+    public function redirect($url)
+    {
+        // We want to use the view url helper method...
+        $app  = \Slim\Slim::getInstance();
+        $view = $app->view();
+        $app->redirect($view->url($url));
+    }
 }

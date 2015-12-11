@@ -1,6 +1,9 @@
 <?php
 namespace Glossary\Controller;
 
+/**
+ * Handles request for the frontpage.
+ */
 class Index extends \Glossary\Controller\AbstractController
 {
     /**

@@ -29,10 +29,16 @@ class Router
                 'action'     => 'index',
             ),
             array(
-                'pattern'    => '/definition/:term',
+                'pattern'    => '/definition',
                 'template'   => 'definition.phtml',
                 'controller' => 'Glossary\Controller\Definition',
                 'action'     => 'index',
+            ),
+            array(
+                'pattern'    => '/definition/:term',
+                'template'   => 'definition.phtml',
+                'controller' => 'Glossary\Controller\Definition',
+                'action'     => 'define',
             ),
         );
     }
