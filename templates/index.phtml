@@ -2,4 +2,8 @@
 
 <h1>Glossar</h1>
 
+<form action="<?php echo $this->url('/'); ?>" method="post">
+    <input type="text" name="searchTerm" id="searchTerm" placeholder="Suchbegriff"></input>
+</form>
+
 <?php echo $this->render('post-content.phtml'); ?>
