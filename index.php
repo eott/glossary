@@ -11,13 +11,14 @@ require 'library/Glossary/autoload.php';
 
 // Bootstrap the Slim app
 $app = new \Slim\Slim(array(
-    'templates.path' => './templates'
+    'templates.path' => './templates',
+    'view'           => new \Glossary\View(),
 ));
 
 // Add the routes to the app
 $router = new \Glossary\Router();
 foreach ($router->getRoutes() as $route) {
-    $app->get($route['pattern'], function() use ($app, $route) {
+    $app->map($route['pattern'], function() use ($app, $route) {
         // Check if the given controller needs to do something
         if (!empty($route['controller'])) {
             $action     = isset($route['action']) ? $route['action'] : 'index';
@@ -27,7 +28,7 @@ foreach ($router->getRoutes() as $route) {
 
         // Render the template
         $app->render($route['template']);
-    });
+    })->via('GET', 'POST');
 }
 
 // All done, run
