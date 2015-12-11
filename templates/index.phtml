@@ -1,8 +1,6 @@
 <?php echo $this->render('pre-content.phtml'); ?>
 
-<h1>Glossar</h1>
-
-<form action="<?php echo $this->url('definition'); ?>" method="post">
+<form class="searchForm" action="<?php echo $this->url('definition'); ?>" method="post">
     <input type="text" name="searchTerm" id="searchTerm" placeholder="Suchbegriff"></input>
 </form>
 

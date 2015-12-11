@@ -35,5 +35,6 @@ class Definition extends \Glossary\Controller\AbstractController
     {
         $term = reset($args);
         $this->_view->mainTerm = $term;
+        $this->_view->mainDescription = '';
     }
 }

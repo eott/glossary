@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    background-color: #EFEFEF;
+}
+
+header {
+    background-color: #ddd;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    height: 40px;
+}
+
+header h1 img {
+    vertical-align: sub;
+}
+
+header h1 a {
+    text-decoration: none;
+    color: #000;
+}
+
+.searchForm {
+    width: 300px;
+    margin: 150px auto 0 auto;
+}
+
+.searchForm #searchTerm {
+    width: 100%;
+    text-align: center;
+    height: 25px;
+    border-radius: 5px;
+}
+
+.cardArea {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.definitionCard {
+    background-color: #F2FFAE;
+    width: 250px;
+    min-height: 50px;
+    border-radius: 20px;
+    text-align: center;
+    margin: auto;
+}
+
+.definitionTerm {
+    font-weight: bold;
+}
+
+.definitionDescription {
+
+}

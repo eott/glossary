@@ -1,7 +1,17 @@
 <?php echo $this->render('pre-content.phtml'); ?>
 
-<div class="definitionCard main">
-    <?php echo $this->mainTerm; ?>
+<div class="cardArea">
+    <div class="definitionCard main">
+        <span class="definitionTerm">
+            <?php echo $this->mainTerm; ?>
+        </span>
+
+        <br/>
+
+        <span class="definitionDescription">
+            <?php echo $this->mainDescription; ?>
+        </span>
+    </div>
 </div>
 
 <?php echo $this->render('post-content.phtml'); ?>
