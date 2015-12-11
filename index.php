@@ -1,13 +1,19 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>Glossar</title>
-        <link rel="icon" type="image/png" href="favicon.png"/>
-        <link href="styles/default-style.css" rel="stylesheet" type="text/css"/>
-    </head>
+<?php
 
-    <body>
+// This is final, we do not negotiate about error reporting.
+// We show all errors and that's it. No excuses.
+error_reporting(E_ALL | E_NOTICE);
+ini_set('display_errors', 1);
 
-    </body>
-</html>
+require 'library/vendor/autoload.php';
+//require 'library/glossary/autoload.php';
+
+$app = new \Slim\Slim(array(
+    'templates.path' => './templates'
+));
+
+$app->get('/', function () use ($app) {
+    $app->render('index.phtml');
+});
+
+$app->run();
