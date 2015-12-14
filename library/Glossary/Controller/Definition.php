@@ -88,7 +88,7 @@ class Definition extends \Glossary\Controller\AbstractController
 
                 $filename = APPLICATION_PATH . '/data/' . strtolower($term) . '.json';
                 if (file_exists($filename)) {
-                    $str = str_replace($trimmed, '<a class="termLink" href="">' . $trimmed . '</a>', $str);
+                    $str = str_replace($trimmed, '<span class="termLink">' . $trimmed . '</span>', $str);
                 }
             }
         }
