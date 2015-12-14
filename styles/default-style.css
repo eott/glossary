@@ -60,6 +60,7 @@ header h1 a {
 .termLink {
     color: #000077;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .errors {
