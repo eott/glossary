@@ -76,7 +76,7 @@ class Definition extends \Glossary\Controller\AbstractController
         $search  = array('\r', '\n', '\t', ' ');
         $replace = array('', '', '', '-');
         $str     = strtolower(str_replace($search, $replace, $term));
-        $str     = preg_replace('[^\w-]', '', $term);
+        $str     = preg_replace('[^\w-]', '', $str);
         return $str;
     }
 
