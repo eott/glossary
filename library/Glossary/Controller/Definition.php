@@ -61,7 +61,13 @@ class Definition extends \Glossary\Controller\AbstractController
 
     /**
      * Formats the given description for its use in the output.
+     * This also looks for other key words in the description and highlights
+     * them for the user, so they can choose to load the definition.
      *
+     * @todo Extract search for keywords into creation of cards or regular
+     *    check. This is too costly to do on every request.
+     * @todo The key word search does not work properly yet. This probably
+     *    needs an external library for matching words in text
      * @param string $desc The description
      * @param string The formatted description
      */
@@ -69,6 +75,24 @@ class Definition extends \Glossary\Controller\AbstractController
     {
         $search  = array('\r', '\n', '\t');
         $replace = array('', '<br/>', '');
-        return str_replace($search, $replace, $desc);
+        $str = str_replace($search, $replace, $desc);
+
+        $matches = array();
+        $pattern = '#\s(\w+)[\s\.,!\?"\']#m';
+        preg_match_all($pattern, $str, $matches);
+
+        if (isset($matches[1])) {
+            foreach ($matches[1] as $match) {
+                $trimmed = trim($match);
+                $term = $this->cleanTerm($trimmed);
+
+                $filename = APPLICATION_PATH . '/data/' . strtolower($term) . '.json';
+                if (file_exists($filename)) {
+                    $str = str_replace($trimmed, '<a class="termLink" href="">' . $trimmed . '</a>', $str);
+                }
+            }
+        }
+
+        return $str;
     }
 }
