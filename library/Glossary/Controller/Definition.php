@@ -44,6 +44,27 @@ class Definition extends \Glossary\Controller\AbstractController
         }
     }
 
+    public function ajaxAction($args)
+    {
+        $term = $this->cleanTerm(urldecode(reset($args)));
+        $filename = APPLICATION_PATH . '/data/' . strtolower($term) . '.json';
+        if (file_exists($filename)) {
+            $data = json_decode(file_get_contents($filename));
+            echo "<div class=\"definitionCard main\">
+                    <span class=\"definitionTerm\">"
+                         . $data->term
+                    . "</span>
+
+                    <br/>
+
+                    <span class=\"definitionDescription\">"
+                        . $data->description
+                    . "</span>
+                </div>";
+        }
+        exit;
+    }
+
     /**
      * Cleans the given seach term for its use in the filename based system.
      *
@@ -88,7 +109,7 @@ class Definition extends \Glossary\Controller\AbstractController
 
                 $filename = APPLICATION_PATH . '/data/' . strtolower($term) . '.json';
                 if (file_exists($filename)) {
-                    $str = str_replace($trimmed, '<span class="termLink">' . $trimmed . '</span>', $str);
+                    $str = str_replace($trimmed, '<span class="termLink" data-term="' . $trimmed . '">' . $trimmed . '</span>', $str);
                 }
             }
         }

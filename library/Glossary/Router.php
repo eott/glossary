@@ -40,6 +40,12 @@ class Router
                 'controller' => 'Glossary\Controller\Definition',
                 'action'     => 'define',
             ),
+            array(
+                'pattern'    => '/definition/ajax/:term',
+                'template'   => 'definition.phtml',
+                'controller' => 'Glossary\Controller\Definition',
+                'action'     => 'ajax',
+            ),
         );
     }
 }
