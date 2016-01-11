@@ -14,8 +14,8 @@ class Format
      */
     public static function cleanTerm($term)
     {
-        $search  = array('\r', '\n', '\t', ' ');
-        $replace = array('', '', '', '-');
+        $search  = array("\r\n", "\r", "\n", "\t", " ");
+        $replace = array('', '', '', '', '-');
         $str     = strtolower(str_replace($search, $replace, $term));
         $str     = preg_replace('[^\w-]', '', $str);
         return $str;
@@ -35,8 +35,8 @@ class Format
      */
     public static function formatDescription($desc)
     {
-        $search  = array('\r', '\n', '\t');
-        $replace = array('', '<br/>', '');
+        $search  = array("\r\n", "\r", "\n", "\t");
+        $replace = array('<br/>', '', '<br/>', '');
         $str = str_replace($search, $replace, $desc);
 
         $matches = array();
