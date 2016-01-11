@@ -2,7 +2,8 @@
 namespace Glossary\Definition;
 
 /**
- *
+ * Provides useful functionality to work with terms and definitions and how
+ * they are stored.
  */
 class Format
 {
