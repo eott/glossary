@@ -36,14 +36,16 @@ class Definition extends \Glossary\Controller\AbstractController
     public function defineAction($args)
     {
         $term = Format::cleanTerm(urldecode(reset($args)));
-        $filename = APPLICATION_PATH . '/data/' . $term . '.json';
-        if (file_exists($filename)) {
-            $data = json_decode(file_get_contents($filename));
-            $this->_view->mainTerm = $data->term;
-            $this->_view->mainDescription = Format::formatDescription($data->description);
-        } else {
+
+        try {
+            $definition = \Glossary\Definition\DefinitionFactory::getInstance()->fromTerm($term);
+        } catch (Exception $e) {
             $this->_view->errors = array('Suchbegriff nicht gefunden.');
+            return;
         }
+
+        $this->_view->mainTerm = $definition->getTerm();
+        $this->_view->mainDescription = Format::formatDescription($definition->getDescription());
     }
 
     /**
