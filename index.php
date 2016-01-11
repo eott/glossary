@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 
 // Useful globals
 defined('APPLICATION_PATH')
-    || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/'));
+    || define('APPLICATION_PATH', realpath(dirname(__FILE__)));
 
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
@@ -16,10 +16,18 @@ defined('APPLICATION_ENV')
 require 'library/vendor/autoload.php';
 require 'library/Glossary/autoload.php';
 
+// Read config file
+if (file_exists(APPLICATION_PATH . '/config.ini')) {
+    $config = parse_ini_file(APPLICATION_PATH . '/config.ini', true);
+} else {
+    $config = parse_ini_file(APPLICATION_PATH . '/config-default.ini', true);
+}
+
 // Bootstrap the Slim app
 $app = new \Slim\Slim(array(
     'templates.path' => './templates',
     'view'           => new \Glossary\View(),
+    'settings'       => $config,
 ));
 
 // Add the routes to the app
