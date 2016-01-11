@@ -6,7 +6,7 @@ class View extends \Slim\View
     /**
      * @var string The base URL of our application.
      */
-    protected $_baseUrl = '/glossary';
+    protected $_baseUrl = null;
 
     /**
      * @see \Slim\View::render()
@@ -14,6 +14,33 @@ class View extends \Slim\View
     public function render($template)
     {
         return parent::render($template);
+    }
+
+    /**
+     * Returns the base URL used for constructing relative URI paths. Lazy-loads
+     * the base URL from the app config if it is not set.
+     *
+     * @return string The base URL
+     */
+    public function getBaseUrl()
+    {
+        if ($this->_baseUrl === null) {
+            $config = \Slim\Slim::getInstance()->config('settings');
+            $this->_baseUrl = $config['App']['base_url'];
+        }
+        return $this->_baseUrl;
+    }
+
+    /**
+     * Sets the base URL to the given value.
+     *
+     * @param string $url The base URL
+     * @return $this
+     */
+    public function setBaseUrl($url)
+    {
+        $this->_baseUrl = $url;
+        return $this;
     }
 
     /**
@@ -46,6 +73,6 @@ class View extends \Slim\View
             $slash = true;
         }
 
-        return $this->_baseUrl . ($slash ? '' : '/') . $route;
+        return $this->getBaseUrl() . ($slash ? '' : '/') . $route;
     }
 }
