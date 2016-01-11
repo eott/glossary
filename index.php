@@ -33,16 +33,9 @@ $app = new \Slim\Slim(array(
 // Add the routes to the app
 $router = new \Glossary\Router();
 foreach ($router->getRoutes() as $route) {
-    $app->map($route['pattern'], function() use ($app, $route) {
-        // Check if the given controller needs to do something
-        if (!empty($route['controller'])) {
-            $action     = isset($route['action']) ? $route['action'] : 'index';
-            $controller = new $route['controller']($app->view());
-            $controller->action($action, func_get_args());
-        }
-
-        // Render the template
-        $app->render($route['template']);
+    $app->map($route['pattern'], function() use ($route, $router) {
+        $params = func_get_args();
+        $router->routeCallback($route, $params);
     })->via('GET', 'POST');
 }
 
