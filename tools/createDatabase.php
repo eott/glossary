@@ -47,3 +47,7 @@ foreach ($tables["tables"] as $tableName) {
         $conn->executeQuery($sql);
     }
 }
+
+// Insert test data
+$sql = file_get_contents(APPLICATION_PATH . '/schema/testdata.sql');
+$conn->executeQuery($sql);
