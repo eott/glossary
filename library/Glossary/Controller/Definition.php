@@ -30,6 +30,7 @@ class Definition extends \Glossary\Controller\AbstractController
      * Is called when a definition should be displayed. Further definitions
      * will be loaded on demand, so we start with only the central one.
      *
+     * @todo Rework data storage of definitions to use a database or something
      * @param array $args The route parameters
      */
     public function defineAction($args)
@@ -45,6 +46,18 @@ class Definition extends \Glossary\Controller\AbstractController
         }
     }
 
+    /**
+     * Is called when a definition is loaded via AJAX call, for example from an
+     * existing definition page. We load the definition data and return it
+     * formated as a card, that is supposed be inserted into a card area.
+     *
+     * NOTE: Because this is an AJAX action, we do not return from this call and
+     * exit script execution with "exit".
+     *
+     * @todo Restructure AJAX calls to not exit early, but somehow use the existing
+     *    MVC structure. Maybe something with disableHeaderFooter?
+     * @param array $args The AJAX call's arguments as key -> value pairs
+     */
     public function ajaxAction($args)
     {
         $term = Format::cleanTerm(urldecode(reset($args)));
