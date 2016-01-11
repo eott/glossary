@@ -23,11 +23,23 @@ if (file_exists(APPLICATION_PATH . '/config.ini')) {
     $config = parse_ini_file(APPLICATION_PATH . '/config-default.ini', true);
 }
 
+// Create database connection
+$dbConfig           = new \Doctrine\DBAL\Configuration();
+$connectionParams = array(
+    'dbname'   => $config['DB']['name'],
+    'user'     => $config['DB']['user'],
+    'password' => $config['DB']['password'],
+    'host'     => $config['DB']['host'],
+    'driver'   => 'pdo_mysql',
+);
+$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $dbConfig);
+
 // Bootstrap the Slim app
 $app = new \Slim\Slim(array(
     'templates.path' => './templates',
     'view'           => new \Glossary\View(),
     'settings'       => $config,
+    'db'             => $conn,
 ));
 
 // Add the routes to the app
