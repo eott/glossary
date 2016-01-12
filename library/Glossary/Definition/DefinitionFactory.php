@@ -95,4 +95,39 @@ class DefinitionFactory
         $definition = new \Glossary\Definition\Definition($row);
         return $definition;
     }
+
+    /**
+     * Creates a new definition object and persists the given data in the storage.
+     * This is also necessary to dispense an ID for the definition.
+     *
+     * The values should have the structure as described in
+     * \Glossary\Definition\Definition::__construct().
+     *
+     * @param array $values Associative array with the values
+     * @return \Glossary\Definition\Definition The created definition object
+     */
+    public function create($values)
+    {
+        // Validation is done by the Definition class, so we start with a bogus ID
+        $values = array_merge($values, array('definition_id' => 0));
+        try {
+            $definition = new \Glossary\Definition\Definition($values);
+        } catch (\Exception $e) {
+            // Some values were missing, just rethrow exception, not much else to do
+            throw $e;
+        }
+
+        $sql = "INSERT INTO glossary.definition(term, description) VALUES (:term, :descr)";
+        $db  = $this->getDb();
+
+        $db->executeUpdate($sql, array(
+            'term'  => $values['term'],
+            'descr' => $values['description'],
+        ));
+
+        $id = $db->lastInsertId();
+        $definition->setDefinitionId($id);
+
+        return $definition;
+    }
 }
