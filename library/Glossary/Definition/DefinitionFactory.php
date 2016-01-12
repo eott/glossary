@@ -69,7 +69,7 @@ class DefinitionFactory
             throw new \Exception("Could not find definition with given id $id.");
         }
 
-        $definition = new \Glossary\Definition($row);
+        $definition = new \Glossary\Definition\Definition($row);
         return $definition;
     }
 
