@@ -49,9 +49,11 @@ class Format
                 $trimmed = trim($match);
                 $term = self::cleanTerm($trimmed);
 
-                $filename = APPLICATION_PATH . '/data/' . strtolower($term) . '.json';
-                if (file_exists($filename)) {
+                try {
+                    $definition = \Glossary\Definition\DefinitionFactory::getInstance()->fromTerm($term);
                     $str = str_replace($trimmed, '<span class="termLink" data-term="' . $trimmed . '">' . $trimmed . '</span>', $str);
+                } catch (Exception $e) {
+                    continue;
                 }
             }
         }

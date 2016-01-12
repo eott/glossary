@@ -26,6 +26,21 @@ class FormatTest extends PHPUnit_Framework_TestCase
 
     public function testFormatDescriptionKnownTerms()
     {
+        $result = $this->getMockBuilder('Doctrine\DBAL\Driver\Statement')
+            ->getMock();
+
+        $db = $this->getMockBuilder('Doctrine\DBAL\Connection')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $result->method('fetch')
+            ->willReturn(array('definition_id' => 1, 'term' => 'Begriff', 'description' => ''));
+
+        $db->method('executeQuery')
+            ->willReturn($result);
+
+        \Glossary\Definition\DefinitionFactory::getInstance()->setDb($db);
+
         // Note: We must terms here, that we know will exist in the environment
         $input = "f9823hf92hrf Begriff ";
         $output = "f9823hf92hrf <span class=\"termLink\" data-term=\"Begriff\">Begriff</span> ";
