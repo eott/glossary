@@ -68,3 +68,26 @@ header h1 a {
     text-align: center;
     font-size: 1.5em;
 }
+
+#declareForm {
+    width: 300px;
+    margin: auto;
+}
+
+#declareForm label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#declareForm #submit {
+    margin-top: 10px;
+}
+
+#termInput {
+    width: 100%;
+}
+
+#descriptionInput {
+    width: 100%;
+    height: 200px;
+}

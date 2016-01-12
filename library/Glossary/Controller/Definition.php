@@ -54,7 +54,41 @@ class Definition extends \Glossary\Controller\AbstractController
      */
     public function declareAction($args)
     {
-        $this->_view->term = "foo";
+        $errors = array();
+
+        if (isset($_POST['submit'])) {
+            $term        = isset($_POST['termInput']) ? $_POST['termInput'] : null;
+            $description = isset($_POST['descriptionInput']) ? $_POST['descriptionInput'] : null;
+
+            if (empty($term)) {
+                $errors[] = "Begriff ist leer.";
+            }
+
+            if (empty($description)) {
+                $errors[] = "Beschreibung ist leer.";
+            }
+
+            if (count($errors) == 0) {
+                $values = array(
+                    'term'        => $term,
+                    'description' => $description,
+                );
+
+                try {
+                    $definition = \Glossary\Definition\DefinitionFactory::getInstance()->create($values);
+                    $this->redirect('definition/' . urlencode($term));
+                } catch(\Exception $e) {
+                    $errors[] = "Es traten Fehler beim Speichern auf.";
+                }
+            }
+        } else {
+            $term        = reset($args);
+            $description = "";
+        }
+
+        $this->_view->errors      = $errors;
+        $this->_view->term        = $term;
+        $this->_view->description = $description;
     }
 
     /**

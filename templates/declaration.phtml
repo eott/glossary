@@ -2,8 +2,18 @@
 
 <div class="cardArea">
     <?php if (empty($this->errors)): ?>
-        <form method="post" action="<?php echo $this->url('definition/declare'); ?>" name="declareForm">
-            <input name="term" id="termInput" type="text" placeholder="Begriff" value="<?php echo $this->term; ?>"></input>
+        <form method="post" action="<?php echo $this->url('definition/declare/' . urlencode($this->term)); ?>" name="declareForm" id="declareForm">
+            <label for="termInput">Begriff</label>
+            <br/>
+            <input name="termInput" id="termInput" type="text" placeholder="Begriff" value="<?php echo $this->term; ?>"></input>
+            <br/>
+
+            <label for="descriptionInput">Beschreibung</label>
+            <br/>
+            <textarea name="descriptionInput" id="descriptionInput"><?php echo $this->description; ?></textarea>
+            <br/>
+
+            <button type="submit" value="submit" name="submit">Speichern</button>
         </form>
     <?php else: ?>
         <div class="errors">
