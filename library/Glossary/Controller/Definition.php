@@ -48,6 +48,16 @@ class Definition extends \Glossary\Controller\AbstractController
     }
 
     /**
+     * Is called when a definition should be created ("defined").
+     *
+     * @param array $args The route parameters
+     */
+    public function declareAction($args)
+    {
+        $this->_view->term = "foo";
+    }
+
+    /**
      * Is called when a definition is loaded via AJAX call, for example from an
      * existing definition page. We load the definition data and return it
      * formated as a card, that is supposed be inserted into a card area.

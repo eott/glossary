@@ -46,6 +46,12 @@ class Router
                 'controller' => 'Glossary\Controller\Definition',
                 'action'     => 'ajax',
             ),
+            array(
+                'pattern'    => '/definition/declare/:term',
+                'template'   => 'declaration.phtml',
+                'controller' => 'Glossary\Controller\Definition',
+                'action'     => 'declare',
+            ),
         );
     }
 

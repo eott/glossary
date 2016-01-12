@@ -1,0 +1,17 @@
+<?php echo $this->render('pre-content.phtml'); ?>
+
+<div class="cardArea">
+    <?php if (empty($this->errors)): ?>
+        <form method="post" action="<?php echo $this->url('definition/declare'); ?>" name="declareForm">
+            <input name="term" id="termInput" type="text" placeholder="Begriff" value="<?php echo $this->term; ?>"></input>
+        </form>
+    <?php else: ?>
+        <div class="errors">
+            <?php foreach ($this->errors as $error): ?>
+                <span class="error"><?php echo $error?></span>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</div>
+
+<?php echo $this->render('post-content.phtml'); ?>
