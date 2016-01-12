@@ -40,22 +40,23 @@ class Format
         $replace = array('<br/>', '', '<br/>', '');
         $str = str_replace($search, $replace, $desc);
 
-        $matches = array();
-        $pattern = '#\s(\w+)[\s\.,!\?"\']#m';
-        preg_match_all($pattern, $str, $matches);
+        // Split by whitespace, then trim non-word-characters. What's left is a rough
+        // approximation of all words in the given text.
+        $matches = preg_split('#\s#', $str);
+        $matches = array_map(function($s) {
+            return preg_replace('#^[^\w]*#', '', preg_replace('#[^\w]*$#', '', $s));
+        }, $matches);
+        $matches = array_unique($matches);
 
-        if (isset($matches[1])) {
-            $matches = array_unique($matches[1]);
-            foreach ($matches as $match) {
-                $trimmed = trim($match);
-                $term = self::cleanTerm($trimmed);
+        foreach ($matches as $match) {
+            $trimmed = trim($match);
+            $term = self::cleanTerm($trimmed);
 
-                try {
-                    $definition = \Glossary\Definition\DefinitionFactory::getInstance()->fromTerm($term);
-                    $str = str_replace($trimmed, '<span class="termLink" data-term="' . $trimmed . '">' . $trimmed . '</span>', $str);
-                } catch (\Exception $e) {
-                    continue;
-                }
+            try {
+                $definition = \Glossary\Definition\DefinitionFactory::getInstance()->fromTerm($term);
+                $str = str_replace($trimmed, '<span class="termLink" data-term="' . $trimmed . '">' . $trimmed . '</span>', $str);
+            } catch (\Exception $e) {
+                continue;
             }
         }
 
