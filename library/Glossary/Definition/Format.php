@@ -45,7 +45,8 @@ class Format
         preg_match_all($pattern, $str, $matches);
 
         if (isset($matches[1])) {
-            foreach ($matches[1] as $match) {
+            $matches = array_unique($matches[1]);
+            foreach ($matches as $match) {
                 $trimmed = trim($match);
                 $term = self::cleanTerm($trimmed);
 
