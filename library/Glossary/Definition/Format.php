@@ -27,10 +27,6 @@ class Format
      * This also looks for other key words in the description and highlights
      * them for the user, so they can choose to load the definition.
      *
-     * @todo Extract search for keywords into creation of cards or regular
-     *    check. This is too costly to do on every request.
-     * @todo The key word search does not work properly yet. This probably
-     *    needs an external library for matching words in text
      * @param string $desc The description
      * @param string The formatted description
      */

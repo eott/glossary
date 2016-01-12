@@ -30,7 +30,6 @@ class Definition extends \Glossary\Controller\AbstractController
      * Is called when a definition should be displayed. Further definitions
      * will be loaded on demand, so we start with only the central one.
      *
-     * @todo Rework data storage of definitions to use a database or something
      * @param array $args The route parameters
      */
     public function defineAction($args)
@@ -56,8 +55,6 @@ class Definition extends \Glossary\Controller\AbstractController
      * NOTE: Because this is an AJAX action, we do not return from this call and
      * exit script execution with "exit".
      *
-     * @todo Restructure AJAX calls to not exit early, but somehow use the existing
-     *    MVC structure. Maybe something with disableHeaderFooter?
      * @param array $args The AJAX call's arguments as key -> value pairs
      */
     public function ajaxAction($args)
