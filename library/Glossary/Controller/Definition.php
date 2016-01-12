@@ -40,6 +40,7 @@ class Definition extends \Glossary\Controller\AbstractController
             $definition = \Glossary\Definition\DefinitionFactory::getInstance()->fromTerm($term);
         } catch (\Exception $e) {
             $this->_view->errors = array('Suchbegriff nicht gefunden.');
+            $this->_view->mainTerm = $term;
             return;
         }
 

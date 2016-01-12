@@ -18,6 +18,14 @@
             <?php foreach ($this->errors as $error): ?>
                 <span class="error"><?php echo $error?></span>
             <?php endforeach; ?>
+
+            <?php if ($this->mainTerm != ''): ?>
+                <br/>
+                <span>
+                    Möchten Sie den Begriff "<?php echo strip_tags($this->mainTerm); ?>" anlegen? Dann klicken Sie
+                    <a href="<?php echo $this->url('definition/declare/' . urlencode($this->mainTerm)); ?>">hier</a>.
+                </span>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 </div>
