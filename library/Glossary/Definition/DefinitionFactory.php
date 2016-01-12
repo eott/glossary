@@ -66,7 +66,7 @@ class DefinitionFactory
         $row    = $result->fetch();
 
         if (empty($row)) {
-            throw new Exception("Could not find definition with given id $id.");
+            throw new \Exception("Could not find definition with given id $id.");
         }
 
         $definition = new \Glossary\Definition($row);
@@ -89,7 +89,7 @@ class DefinitionFactory
         $row    = $result->fetch();
 
         if (empty($row)) {
-            throw new Exception("Could not find definition with given term $term.");
+            throw new \Exception("Could not find definition with given term $term.");
         }
 
         $definition = new \Glossary\Definition\Definition($row);

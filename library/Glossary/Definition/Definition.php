@@ -36,7 +36,7 @@ class Definition
             if (array_key_exists($key, $attr)) {
                 return $attr[$key];
             } elseif ($required) {
-                throw new Exception("Required attribute $key of $definition was empty.");
+                throw new \Exception("Required attribute $key of $definition was empty.");
             } else {
                 return null;
             }

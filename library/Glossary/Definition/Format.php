@@ -52,7 +52,7 @@ class Format
                 try {
                     $definition = \Glossary\Definition\DefinitionFactory::getInstance()->fromTerm($term);
                     $str = str_replace($trimmed, '<span class="termLink" data-term="' . $trimmed . '">' . $trimmed . '</span>', $str);
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     continue;
                 }
             }

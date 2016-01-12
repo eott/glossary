@@ -39,7 +39,7 @@ class Definition extends \Glossary\Controller\AbstractController
 
         try {
             $definition = \Glossary\Definition\DefinitionFactory::getInstance()->fromTerm($term);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->_view->errors = array('Suchbegriff nicht gefunden.');
             return;
         }
@@ -79,7 +79,7 @@ class Definition extends \Glossary\Controller\AbstractController
                     . "</span>
                 </div>";
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             echo "<div class=\"errors\">
                 <span class=\"error\">Suchbegriff nicht gefunden</span>
                 </div>";
