@@ -1,1 +1,1 @@
-phpunit --bootstrap tests/autoload.php tests
+phpunit --bootstrap tests/bootstrap.php --no-globals-backup tests
