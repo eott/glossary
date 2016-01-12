@@ -63,21 +63,28 @@ class Definition extends \Glossary\Controller\AbstractController
     public function ajaxAction($args)
     {
         $term = Format::cleanTerm(urldecode(reset($args)));
-        $filename = APPLICATION_PATH . '/data/' . strtolower($term) . '.json';
-        if (file_exists($filename)) {
-            $data = json_decode(file_get_contents($filename));
+
+        try {
+            $definition = \Glossary\Definition\DefinitionFactory::getInstance()->fromTerm($term);
+
             echo "<div class=\"definitionCard main\">
                     <span class=\"definitionTerm\">"
-                         . $data->term
+                         . $definition->getTerm()
                     . "</span>
 
                     <br/>
 
                     <span class=\"definitionDescription\">"
-                        . $data->description
+                        . Format::formatDescription($definition->getDescription())
                     . "</span>
                 </div>";
+
+        } catch (Exception $e) {
+            echo "<div class=\"errors\">
+                <span class=\"error\">Suchbegriff nicht gefunden</span>
+                </div>";
         }
+
         exit;
     }
 }
