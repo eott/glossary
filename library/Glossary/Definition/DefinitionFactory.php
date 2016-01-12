@@ -40,6 +40,18 @@ class DefinitionFactory
     }
 
     /**
+     * Sets the database connection to use to the given value.
+     *
+     * @param Doctrine\DBAL\Connection $db The database connection
+     * @return \Glossary\Definition\DefinitionFactory $this
+     */
+    public function setDb($db)
+    {
+        $this->_db = $db;
+        return $this;
+    }
+
+    /**
      * Tries to find a Definition with the given ID and returns it.
      *
      * @param int|string The ID
