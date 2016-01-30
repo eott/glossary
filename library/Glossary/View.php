@@ -75,4 +75,21 @@ class View extends \Slim\View
 
         return $this->getBaseUrl() . ($slash ? '' : '/') . $route;
     }
+
+    /**
+     * Returns the javascript code that should be included in the view content
+     * the script files are bound externally. This is useful and necessary
+     * because these scripts might require installation or request specific data,
+     * such as the base URL of the installation or user data.
+     *
+     * @return string The javascript code to be inline before the script files
+     */
+    public function getInlineJavascript()
+    {
+        // Various settings
+        $js = sprintf("var settings = function() {
+            this.system = {}
+            this.system.baseUrl = '%s'
+        }", $this->url('/'));
+    }
 }
