@@ -1,6 +1,6 @@
 {
-    "name": "wiethe/glossary",
-    "description": "Wiethe Glossary",
+    "name": "eott/glossary",
+    "description": "A webapp acting as a glossary.",
     "config": {
         "vendor-dir": "library/vendor"
     },
